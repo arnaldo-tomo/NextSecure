@@ -70,7 +70,7 @@ export function Sidebar({ collapsed = false, onToggle, extraLinks = [] }: Sideba
                 />
               </svg>
             </div>
-            <span className="text-lg font-bold text-slate-900">NextSecure</span>
+            <span className="text-lg font-bold text-slate-900">TomoAuth</span>
           </Link>
         )}
         <button

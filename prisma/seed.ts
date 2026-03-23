@@ -8,11 +8,11 @@ async function main() {
 
   // Create admin user
   await prisma.user.upsert({
-    where: { email: "admin@nextsecure.dev" },
+    where: { email: "admin@tomo-auth.dev" },
     update: {},
     create: {
       name: "Admin",
-      email: "admin@nextsecure.dev",
+      email: "admin@tomo-auth.dev",
       password: hashedPassword,
       role: "admin",
       emailVerified: new Date(),
@@ -21,11 +21,11 @@ async function main() {
 
   // Create regular user
   await prisma.user.upsert({
-    where: { email: "user@nextsecure.dev" },
+    where: { email: "user@tomo-auth.dev" },
     update: {},
     create: {
       name: "User",
-      email: "user@nextsecure.dev",
+      email: "user@tomo-auth.dev",
       password: hashedPassword,
       role: "user",
       emailVerified: new Date(),

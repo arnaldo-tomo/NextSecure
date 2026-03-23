@@ -1,4 +1,4 @@
-# 🔐 NextSecure
+# 🔐 TomoAuth
 
 **Plug-and-play authentication, dashboard & role-based access for Next.js 14+.**
 
@@ -33,7 +33,7 @@ cd my-app
 ### 2. Initialize
 
 ```bash
-npx nextsecure init
+npx tomo-auth init
 ```
 
 This will:
@@ -45,7 +45,7 @@ This will:
 ### 3. Seed Demo Users (optional)
 
 ```bash
-npx nextsecure db:seed
+npx tomo-auth db:seed
 ```
 
 Demo accounts:
@@ -230,10 +230,10 @@ import { Skeleton, CardSkeleton } from "@/components/ui/Skeleton";
 
 | Command | Description |
 |---|---|
-| `npx nextsecure init` | Full project initialization |
-| `npx nextsecure db:setup` | Push Prisma schema to database |
-| `npx nextsecure db:seed` | Seed demo users |
-| `npx nextsecure help` | Show help |
+| `npx tomo-auth init` | Full project initialization |
+| `npx tomo-auth db:setup` | Push Prisma schema to database |
+| `npx tomo-auth db:seed` | Seed demo users |
+| `npx tomo-auth help` | Show help |
 
 ---
 

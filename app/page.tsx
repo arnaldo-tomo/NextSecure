@@ -23,7 +23,7 @@ export default function HomePage() {
                 />
               </svg>
             </div>
-            <span className="text-lg font-bold text-slate-900">NextSecure</span>
+            <span className="text-lg font-bold text-slate-900">TomoAuth</span>
           </div>
           <div className="flex items-center gap-3">
             <Link href="/auth/login">

@@ -41,7 +41,7 @@ export function AuthForm({
               </svg>
             </div>
             <span className="text-xl font-bold text-slate-900">
-              {process.env.NEXT_PUBLIC_APP_NAME || "NextSecure"}
+              {process.env.NEXT_PUBLIC_APP_NAME || "TomoAuth"}
             </span>
           </Link>
         </div>

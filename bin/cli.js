@@ -19,7 +19,7 @@ const colors = {
 };
 
 function log(msg) {
-  console.log(`${colors.blue}[NextSecure]${colors.reset} ${msg}`);
+  console.log(`${colors.blue}[TomoAuth]${colors.reset} ${msg}`);
 }
 
 function success(msg) {
@@ -38,7 +38,7 @@ function banner() {
   console.log(`
 ${colors.blue}${colors.bright}
    ╔═══════════════════════════════════════╗
-   ║         🔐 NextSecure v1.0.0         ║
+   ║         🔐 TomoAuth v1.0.0            ║
    ║   Plug-and-play auth for Next.js     ║
    ╚═══════════════════════════════════════╝
 ${colors.reset}`);
@@ -48,26 +48,89 @@ function help() {
   banner();
   console.log(`
 ${colors.bright}Usage:${colors.reset}
-  npx nextsecure <command>
+  npx tomo-auth <command>
 
 ${colors.bright}Commands:${colors.reset}
-  ${colors.cyan}init${colors.reset}        Initialize NextSecure in your project
+  ${colors.cyan}init${colors.reset}        Initialize TomoAuth in your project
   ${colors.cyan}db:setup${colors.reset}    Set up the database with Prisma
   ${colors.cyan}db:seed${colors.reset}     Seed the database with demo users
   ${colors.cyan}help${colors.reset}        Show this help message
 
 ${colors.bright}Examples:${colors.reset}
-  ${colors.dim}npx nextsecure init${colors.reset}
-  ${colors.dim}npx nextsecure db:setup${colors.reset}
-  ${colors.dim}npx nextsecure db:seed${colors.reset}
+  ${colors.dim}npx tomo-auth init${colors.reset}
+  ${colors.dim}npx tomo-auth db:setup${colors.reset}
+  ${colors.dim}npx tomo-auth db:seed${colors.reset}
 `);
 }
 
 function init() {
   banner();
-  log("Initializing NextSecure...\n");
+  log("Initializing TomoAuth...\n");
 
-  // Check if .env exists
+  const packageDir = path.join(__dirname, "..");
+  const projectDir = process.cwd();
+
+  const directoriesToCopy = [
+    "app",
+    "components",
+    "hooks",
+    "lib",
+    "prisma",
+    "styles",
+    "types",
+  ];
+
+  const filesToCopy = [
+    ".env.example",
+    "middleware.ts",
+    "next.config.js",
+    "postcss.config.js",
+    "tailwind.config.ts",
+    "tsconfig.json",
+  ];
+
+  // Helper to copy directory recursively
+  function copyDir(src, dest) {
+    if (!fs.existsSync(dest)) {
+      fs.mkdirSync(dest, { recursive: true });
+    }
+    const entries = fs.readdirSync(src, { withFileTypes: true });
+
+    for (const entry of entries) {
+      const srcPath = path.join(src, entry.name);
+      const destPath = path.join(dest, entry.name);
+
+      if (entry.isDirectory()) {
+        copyDir(srcPath, destPath);
+      } else {
+        if (!fs.existsSync(destPath)) {
+          fs.copyFileSync(srcPath, destPath);
+        }
+      }
+    }
+  }
+
+  // Copy directories
+  for (const dir of directoriesToCopy) {
+    const src = path.join(packageDir, dir);
+    const dest = path.join(projectDir, dir);
+    if (fs.existsSync(src)) {
+      copyDir(src, dest);
+      success(`Copied ${dir}/`);
+    }
+  }
+
+  // Copy files
+  for (const file of filesToCopy) {
+    const src = path.join(packageDir, file);
+    const dest = path.join(projectDir, file);
+    if (fs.existsSync(src) && !fs.existsSync(dest)) {
+      fs.copyFileSync(src, dest);
+      success(`Created ${file}`);
+    }
+  }
+
+  // Create .env from .env.example
   if (!fs.existsSync(".env")) {
     if (fs.existsSync(".env.example")) {
       fs.copyFileSync(".env.example", ".env");
@@ -98,8 +161,7 @@ function init() {
     execSync("npm install", { stdio: "inherit" });
     success("Dependencies installed");
   } catch {
-    error("Failed to install dependencies");
-    process.exit(1);
+    error("Failed to install dependencies (try: npm install --legacy-peer-deps)");
   }
 
   // Setup database
@@ -109,12 +171,12 @@ function init() {
     execSync("npx prisma db push", { stdio: "inherit" });
     success("Database ready");
   } catch {
-    warn("Database setup skipped — configure DATABASE_URL in .env and run: npx nextsecure db:setup");
+    warn("Database setup skipped — configure DATABASE_URL in .env and run: npx tomo-auth db:setup");
   }
 
   console.log(`
 ${colors.green}${colors.bright}
-  ✅ NextSecure is ready!
+  ✅ TomoAuth is ready!
 ${colors.reset}
   ${colors.dim}Run your dev server:${colors.reset}
   ${colors.cyan}npm run dev${colors.reset}
@@ -123,11 +185,11 @@ ${colors.reset}
   ${colors.cyan}http://localhost:3000${colors.reset}
 
   ${colors.dim}Demo accounts (after seeding):${colors.reset}
-  ${colors.dim}Admin: admin@nextsecure.dev / password123${colors.reset}
-  ${colors.dim}User:  user@nextsecure.dev / password123${colors.reset}
+  ${colors.dim}Admin: admin@tomo-auth.dev / password123${colors.reset}
+  ${colors.dim}User:  user@tomo-auth.dev / password123${colors.reset}
 
   ${colors.dim}Seed the database:${colors.reset}
-  ${colors.cyan}npx nextsecure db:seed${colors.reset}
+  ${colors.cyan}npx tomo-auth db:seed${colors.reset}
 `);
 }
 
@@ -154,8 +216,8 @@ function dbSeed() {
     success("Database seeded successfully!");
     console.log(`
   ${colors.dim}Demo accounts:${colors.reset}
-  ${colors.cyan}Admin: admin@nextsecure.dev / password123${colors.reset}
-  ${colors.cyan}User:  user@nextsecure.dev / password123${colors.reset}
+  ${colors.cyan}Admin: admin@tomo-auth.dev / password123${colors.reset}
+  ${colors.cyan}User:  user@tomo-auth.dev / password123${colors.reset}
 `);
   } catch {
     error("Failed to seed database. Make sure the database is set up first.");

@@ -1,11 +1,9 @@
 {
-  "name": "nextsecure",
+  "name": "tomo-auth",
   "version": "1.0.0",
-  "description": "🔐 NextSecure — Plug-and-play authentication, dashboard & role-based access for Next.js 14+. Like Laravel Breeze, but for Next.js.",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "description": "🔐 TomoAuth — Plug-and-play authentication, dashboard & role-based access for Next.js 14+. Like Laravel Breeze, but for Next.js.",
   "bin": {
-    "nextsecure": "./bin/cli.js"
+    "tomo-auth": "./bin/cli.js"
   },
   "scripts": {
     "dev": "next dev",
