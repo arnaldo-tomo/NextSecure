@@ -35,13 +35,13 @@
     "starter-kit"
   ],
   "author": "Arnaldo Tomo <https://arnaldotomo.dev>",
-  "homepage": "https://github.com/arnaldo-tomo/nextsecure#readme",
+  "homepage": "https://github.com/arnaldo-tomo/tomo-auth#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arnaldo-tomo/nextsecure.git"
+    "url": "git+https://github.com/arnaldo-tomo/tomo-auth.git"
   },
   "bugs": {
-    "url": "https://github.com/arnaldo-tomo/nextsecure/issues"
+    "url": "https://github.com/arnaldo-tomo/tomo-auth/issues"
   },
   "license": "MIT",
   "dependencies": {

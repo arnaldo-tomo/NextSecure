@@ -26,7 +26,7 @@ Like Laravel Breeze, but for Next.js — modern, beautiful, and production-ready
 ### 1. Clone / Install
 
 ```bash
-git clone https://github.com/arnaldo-tomo/nextsecure.git my-app
+git clone https://github.com/arnaldo-tomo/tomo-auth.git my-app
 cd my-app
 ```
 
@@ -67,7 +67,7 @@ Open [http://localhost:3000](http://localhost:3000)
 ## 📁 Project Structure
 
 ```
-nextsecure/
+tomo-auth/
 ├── app/
 │   ├── api/auth/
 │   │   ├── [...nextauth]/route.ts   # NextAuth handler
