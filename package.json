@@ -1,6 +1,6 @@
 {
   "name": "tomo-auth",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "🔐 TomoAuth — Plug-and-play authentication, dashboard & role-based access for Next.js 14+. Like Laravel Breeze, but for Next.js.",
   "bin": {
     "tomo-auth": "./bin/cli.js"
@@ -13,8 +13,7 @@
     "db:push": "prisma db push",
     "db:migrate": "prisma migrate dev",
     "db:seed": "prisma db seed",
-    "db:studio": "prisma studio",
-    "postinstall": "prisma generate"
+    "db:studio": "prisma studio"
   },
   "keywords": [
     "nextjs",
